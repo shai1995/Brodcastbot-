@@ -25,18 +25,18 @@
 
 <details><summary>Tap On Me For Environment Variable</summary>
 
-* `API_ID` - Get From [Here](https://youtu.be/RdMY6Lqfi9w)
-* `API_HASH` - Get From [Here](https://youtu.be/RdMY6Lqfi9w)
-* `BOT_TOKEN` - Get From [BotFather](https://youtu.be/aJILCCXfNVM)
-* `BOT_USERNAME` - Username of your Telegram bot without '@'
-* `AUTH_CHANNEL` - Your Force subscribe channel id.
-* `LOG_CHANNEL` - Your log channel id
-* `BOT_OWNER` - bot owners Id/ ids ( for broadcast and stats cmds). for multiple use space.
-* `DATABASE_URL` - Mongodb [Database](https://youtu.be/pMJpHoiu1go)
+- `API_ID` : Get From [Here](https://youtu.be/y5FwAobQ-Kc)
+- `API_HASH` : Get From [Here](https://youtu.be/y5FwAobQ-Kc)
+- `BOT_TOKEN` : Get From [BotFather](https://youtu.be/aJILCCXfNVM)
+- `ADMIN` : Your Telegram User ID
+- `DB_URI` : MongoDB database get from [here](https://youtu.be/j8LIuM7vv18)
+- `DB_NAME` : MongoDB database name get from [here](https://youtu.be/j8LIuM7vv18)
+- `LOG_CHANNEL` : Your Log channel ID.
+- `AUTH_CHANNELS` : Your FSUB channels ID.
 </details>
 
 ### 🥳 CREDIT
-- 💝 [TechifyBots](https://github.com/TechifyBots)
+- [TechifyBots](https://github.com/TechifyBots)
 
 ### 💕 CONTACT DEVELOPER
 - [Rahul](https://telegram.me/TechifySupport)
