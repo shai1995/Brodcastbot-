@@ -30,7 +30,6 @@
 - `BOT_TOKEN` : Get From [BotFather](https://youtu.be/aJILCCXfNVM)
 - `ADMIN` : Your Telegram User ID
 - `DB_URI` : MongoDB database get from [here](https://youtu.be/j8LIuM7vv18)
-- `DB_NAME` : MongoDB database name get from [here](https://youtu.be/j8LIuM7vv18)
 - `LOG_CHANNEL` : Your Log channel ID.
 - `AUTH_CHANNELS` : Your FSUB channels ID.
 </details>
