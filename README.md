@@ -14,6 +14,8 @@
 - Supports all type of emojies
 - work in both channels & groups
 - Fully modified repo
+- Stats & Broadcast feature available
+- Fsub & Log channel support
 - Deploy To Koyeb + Heroku + Railway.
 - [Developer support](https://telegram.me/TechifySupport) 24x7
 </details>
@@ -34,14 +36,9 @@
 </details>
 
 ### 🥳 CREDIT
-
-<details><summary>Tap On Me For Credit</summary>
-
-💝 [TechifyBots](https://github.com/TechifyBots)
-</details>
+- 💝 [TechifyBots](https://github.com/TechifyBots)
 
 ### 💕 CONTACT DEVELOPER
-
 - [Rahul](https://telegram.me/TechifySupport)
 
 ### ☕ BUY ME A COFFEE
