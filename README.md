@@ -34,6 +34,17 @@
 - `AUTH_CHANNELS` : Your FSUB channels ID.
 </details>
 
+### 😍 COMMANDS
+
+<details><summary>Tap On Me For Commands</summary>
+
+```
+start - Start The Bot
+broadcast - (admin only) Broadcast message to bot users
+stats - (admin only) check bots stats
+```
+</details>
+
 ### 💞 CREDIT
 - [TechifyBots](https://github.com/TechifyBots)
 
