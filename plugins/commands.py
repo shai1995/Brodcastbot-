@@ -5,38 +5,42 @@ from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from config import *
 import asyncio
 from Script import text
-from .db import data
+from .db import tb
 from .fsub import get_fsub
 
 @Client.on_message(filters.command("start"))
 async def start_cmd(client, message):
-    if await data.get_user(message.from_user.id) is None:
-        await data.addUser(message.from_user.id, message.from_user.first_name)
+    if await tb.get_user(message.from_user.id) is None:
+        await tb.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(
             LOG_CHANNEL,
             text.LOG.format(message.from_user.mention, message.from_user.id)
         )
     if IS_FSUB and not await get_fsub(client, message):return
+    await tb.update_user_activity(message.from_user.id)
     await message.reply_text(
         text.START.format(message.from_user.mention),
         reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('⇆ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⇆', url="https://telegram.me/QuickReactRobot?startgroup=botstart")],
-            [InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'), InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help')],
+            [InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
+             InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help')],
             [InlineKeyboardButton('⇆ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ⇆', url="https://telegram.me/QuickReactRobot?startchannel=botstart")]
         ]),
         disable_web_page_preview=True
     )
 
-@Client.on_message(filters.command("users") & filters.user(ADMIN))
-async def total_users(client: Client, message: Message):
+@Client.on_message(filters.command("stats") & filters.private & filters.user(ADMIN))
+async def total_users(client, message):
     try:
-        total = await data.users.count_documents({})
-        await message.reply_text(f"📊 **Total Users:** `{total}`")
+        users = await tb.get_all_users()
+        active_today = await tb.get_active_users_today()
+        await message.reply(f"📊 **Bot Statistics**\n\n👥 **Total Users:** `{len(users)}`\n✅ **Active Today:** {active_today}\n📈 **Active Rate:** {(active_today/len(users)*100):.1f}%",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎭 Close", callback_data="close")]]))
     except Exception as e:
-        print(f"Error in /users command: {e}")
-        await message.reply_text("⚠️ An error occurred while fetching user count.")
+        r=await message.reply(f"❌ *Error:* `{str(e)}`")
+        await asyncio.sleep(30)
+        await r.delete()
 
-@Client.on_message(filters.command("broadcast") & (filters.private) & filters.user(ADMIN))
+@Client.on_message(filters.command("broadcast") & filters.private & filters.user(ADMIN))
 async def broadcasting_func(client: Client, message: Message):
     try:
         msg = await message.reply_text("Wait a second!")
@@ -46,8 +50,8 @@ async def broadcasting_func(client: Client, message: Message):
         completed = 0
         failed = 0
         to_copy_msg = message.reply_to_message
-        users_list = await data.get_all_users()
-        
+        users_list = await tb.get_all_users()
+
         for i, userDoc in enumerate(users_list):
             if i % 20 == 0:
                 await msg.edit(f"Total: {i}\nCompleted: {completed}\nFailed: {failed}")
@@ -68,7 +72,7 @@ async def broadcasting_func(client: Client, message: Message):
             except Exception as e:
                 print(f"Error in broadcasting to {user_id}: {e}")
                 failed += 1
-                
+
         await msg.edit(f"Successfully Broadcasted\nTotal: {len(users_list)}\nCompleted: {completed}\nFailed: {failed}")
     except Exception as e:
         print(f"Error in broadcast: {e}")
@@ -80,7 +84,7 @@ async def send_reaction(client: Client, msg: Message):
         await msg.react(random.choice(EMOJIS))
     except FloodWait as e:
         print(f"FloodWait: Sleeping for {e.value} seconds")
-        await asyncio.sleep(e.value)  # Wait and retry
+        await asyncio.sleep(e.value)
         await msg.react(random.choice(EMOJIS))
     except Exception as e:
-        print(f"Reaction error: {e}")
+        print(f"Error: {e}")
