@@ -19,12 +19,6 @@ async def start_cmd(client, message):
     if IS_FSUB and not await get_fsub(client, message):return
     await message.reply_text(
         text.START.format(message.from_user.mention),
-        reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton('⇆ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⇆', url="https://telegram.me/QuickReactRobot?startgroup=botstart")],
-            [InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about'),
-             InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help')],
-            [InlineKeyboardButton('⇆ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ⇆', url="https://telegram.me/QuickReactRobot?startchannel=botstart")]
-        ]),
         disable_web_page_preview=True
     )
 
